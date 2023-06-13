@@ -1,7 +1,19 @@
+/**
+ * My Body Main class
+ * Author: Narigane
+ * Date: 2021-06-13
+ * Description: Main class for my body project to connect to mongodb atlas cluster
+ * Version: 1.0
+ */
+
+
 package org.example;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -20,6 +32,13 @@ public class Main {
         logger.info(connectionString);
 
         try (MongoClient mongoClient = MongoClients.create(connectionString)) {
+            // Get the database myBody
+            MongoDatabase mongoDb= mongoClient.getDatabase("myBody");
+            // set Collection to users
+            MongoCollection<Document> usersCollection = mongoDb.getCollection("users");
+            // set Collection training
+            MongoCollection<Document> trainingCollection = mongoDb.getCollection("training");
+
 
             logger.info("Database connection successful");
         } catch (Exception e) {
