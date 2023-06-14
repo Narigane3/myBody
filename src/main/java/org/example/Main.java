@@ -14,31 +14,49 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.example.model.User;
+import org.example.repository.UserRepositoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import io.github.cdimascio.dotenv.Dotenv;
+
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class Main {
     private static final Dotenv dotenv = Dotenv.load();
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
     // login url for mongodb atlas cluster get from env variable
-    private static final String connectionString = "mongodb+srv://" + dotenv.get("DB_PASSWORD") + ":" + dotenv.get("DB_USERNAME") + "@devdescktop.vpi0ffm.mongodb.net/";
+    private static final String connectionString = "mongodb+srv://" + dotenv.get("DB_USERNAME") + ":" + dotenv.get("DB_PASSWORD") + "@devdescktop.vpi0ffm.mongodb.net/";
 
     public static void main(String[] args) {
 
         logger.info("Welcome to my Body");
 
-        logger.info(connectionString);
-
         try (MongoClient mongoClient = MongoClients.create(connectionString)) {
+
             // Get the database myBody
-            MongoDatabase mongoDb= mongoClient.getDatabase("myBody");
+            MongoDatabase mongoDb = mongoClient.getDatabase("my_body");
             // set Collection to users
             MongoCollection<Document> usersCollection = mongoDb.getCollection("users");
             // set Collection training
-            MongoCollection<Document> trainingCollection = mongoDb.getCollection("training");
+            //MongoCollection<Document> trainingCollection = mongoDb.getCollection("training");
 
+            // Instance of UserRepositoryImpl
+            UserRepositoryImpl userRepository = new UserRepositoryImpl(usersCollection);
+
+       /*     User user = new User(
+                    0,
+                    "Loic",
+                    "Narigane",
+                    new Date(1998, Calendar.JULY, 21),
+                    true,
+                    "narigane@test.com",
+                    "password");
+
+            logger.info("User saved {}", userRepository.save(user));
+*/
 
             logger.info("Database connection successful");
         } catch (Exception e) {
