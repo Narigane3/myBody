@@ -13,15 +13,14 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import gui.Home;
+import gui.Window;
 import org.bson.Document;
-import org.example.model.User;
-import org.example.repository.UserRepositoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import io.github.cdimascio.dotenv.Dotenv;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.awt.*;
 
 
 public class Main {
@@ -32,7 +31,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-        logger.info("Welcome to my Body");
+        // Start gui window
+        EventQueue.invokeLater(() -> {
+            try {
+                Window window = new Window("My Body");
+                new Home(window);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
 
         try (MongoClient mongoClient = MongoClients.create(connectionString)) {
 
@@ -40,11 +49,12 @@ public class Main {
             MongoDatabase mongoDb = mongoClient.getDatabase("my_body");
             // set Collection to users
             MongoCollection<Document> usersCollection = mongoDb.getCollection("users");
+
             // set Collection training
             //MongoCollection<Document> trainingCollection = mongoDb.getCollection("training");
 
             // Instance of UserRepositoryImpl
-            UserRepositoryImpl userRepository = new UserRepositoryImpl(usersCollection);
+//            UserRepositoryImpl userRepository = new UserRepositoryImpl(usersCollection);
 
        /*     User user = new User(
                     0,

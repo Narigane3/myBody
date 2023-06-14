@@ -15,12 +15,9 @@ public class UserMapper {
      */
     public Document UserToDocument(User user) {
         return new Document()
-                .append("user_id", user.getUser_id())
                 .append("firstName", user.getFirstName())
                 .append("lastName", user.getLastName())
                 .append("birthDate", user.getBirthDate())
-                .append("email", user.getEmail())
-                .append("password", user.getPassword())
                 .append("gender", user.getGender());
     }
 
@@ -32,13 +29,10 @@ public class UserMapper {
      */
     public User documentToUser(Document document) {
         return new User(
-                (int) document.get("user_id"),
                 (String) document.get("firstName"),
                 (String) document.get("lastName"),
                 (Date) document.get("birthDate"),
-                (Boolean) document.get("gender"),
-                (String) document.get("email"),
-                (String) document.get("password")
+                (Boolean) document.get("gender")
         );
     }
 }
