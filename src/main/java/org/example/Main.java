@@ -13,8 +13,8 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import gui.Home;
 import gui.Window;
+import gui.users.HomeGUI;
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +35,7 @@ public class Main {
         EventQueue.invokeLater(() -> {
             try {
                 Window window = new Window("My Body");
-                new Home(window);
+                new HomeGUI(window);
 
             } catch (Exception e) {
                 e.printStackTrace();

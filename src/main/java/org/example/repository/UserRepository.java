@@ -1,5 +1,6 @@
 package org.example.repository;
 
+import org.example.model.ConnectDB;
 import org.example.model.User;
 
 import java.util.List;

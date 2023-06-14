@@ -4,6 +4,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.result.InsertOneResult;
 import org.bson.Document;
 import org.example.mapper.UserMapper;
+import org.example.model.ConnectDB;
 import org.example.model.User;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class UserRepositoryImpl implements UserRepository{
+public class UserRepositoryImpl implements UserRepository {
     UserMapper userMapper = new UserMapper();
     MongoCollection<Document> collection;
     public UserRepositoryImpl(MongoCollection<Document> usersCollection) {
