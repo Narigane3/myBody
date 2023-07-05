@@ -9,7 +9,7 @@ public class TrainingControllerImpl implements TrainingController {
         this.trainingRepository = trainingRepository;
     }
     @Override
-    public String saveTraining(Training training) {
-        return this.trainingRepository.addTraining(training);
+    public String saveTraining(Training training, String connectionString) {
+        return this.trainingRepository.addTraining(training, connectionString);
     }
 }

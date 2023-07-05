@@ -1,6 +1,5 @@
 package org.example.repository;
 
-import org.example.model.ConnectDB;
 import org.example.model.User;
 
 import java.util.List;
@@ -11,12 +10,12 @@ public interface UserRepository {
      * @param user instance of model User
      * @return
      */
-    String save(User user);
+    String save(User user, String connectionString);
 
     /**
      * Get all users from the database
      * @return list of users
      */
-    List<User> getAll();
+    List<User> getAll(String connectionString);
 
 }

@@ -4,14 +4,14 @@ public class Training {
 
     private String name;
     private String duration;
-    private String data;
+    private String date;
     private String postExerciseRecovery;
     private String charge;
 
-    public Training(String name, String duration, String data, String postExerciseRecovery, String charge) {
+    public Training(String name, String duration, String date, String postExerciseRecovery, String charge) {
         this.name = name;
         this.duration = duration;
-        this.data = data;
+        this.date = date;
         this.postExerciseRecovery = postExerciseRecovery;
         this.charge = charge;
     }
@@ -34,12 +34,12 @@ public class Training {
         this.duration = duration;
     }
 
-    public String getData() {
-        return data;
+    public String getDate() {
+        return date;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getPostExerciseRecovery() {
