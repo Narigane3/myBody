@@ -15,6 +15,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import gui.Window;
 import gui.users.HomeGUI;
+import gui.users.UserGUI;
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,52 +27,17 @@ import java.awt.*;
 public class Main {
     private static final Dotenv dotenv = Dotenv.load();
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
-    // login url for mongodb atlas cluster get from env variable
     private static final String connectionString = "mongodb+srv://" + dotenv.get("DB_USERNAME") + ":" + dotenv.get("DB_PASSWORD") + "@devdescktop.vpi0ffm.mongodb.net/";
 
     public static void main(String[] args) {
-
-        // Start gui window
         EventQueue.invokeLater(() -> {
             try {
                 Window window = new Window("My Body");
-                new HomeGUI(window);
+                new HomeGUI(window, connectionString);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
-
-
-        try (MongoClient mongoClient = MongoClients.create(connectionString)) {
-
-            // Get the database myBody
-            MongoDatabase mongoDb = mongoClient.getDatabase("my_body");
-            // set Collection to users
-            MongoCollection<Document> usersCollection = mongoDb.getCollection("users");
-
-            // set Collection training
-            //MongoCollection<Document> trainingCollection = mongoDb.getCollection("training");
-
-            // Instance of UserRepositoryImpl
-//            UserRepositoryImpl userRepository = new UserRepositoryImpl(usersCollection);
-
-       /*     User user = new User(
-                    0,
-                    "Loic",
-                    "Narigane",
-                    new Date(1998, Calendar.JULY, 21),
-                    true,
-                    "narigane@test.com",
-                    "password");
-
-            logger.info("User saved {}", userRepository.save(user));
-*/
-
-            logger.info("Database connection successful");
-        } catch (Exception e) {
-            logger.error("An error occurred during connection ==> {}", e);
-        }
-
     }
 }

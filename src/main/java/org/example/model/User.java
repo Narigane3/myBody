@@ -7,7 +7,12 @@ public class User {
     private String lastName;
     private String firstName;
     private Date birthDate;
-    private final Boolean gender;
+    private Boolean gender;
+    private Integer totalLoad;
+    private Double monotony;
+    private Double strain;
+    private Double fitness;
+    private double acwr;
 
 
     public User(String lastName, String firstName, Date birthDate, Boolean gender) {
@@ -44,5 +49,9 @@ public class User {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public void setGender(Boolean gender) {
+        this.gender = gender;
     }
 }

@@ -13,7 +13,7 @@ public class UserMapper {
      * @param user instance of model User
      * @return document of data user
      */
-    public Document UserToDocument(User user) {
+    public Document serToDocument(User user) {
         return new Document()
                 .append("firstName", user.getFirstName())
                 .append("lastName", user.getLastName())

@@ -1,29 +1,40 @@
 package gui.users;
 
 import gui.Window;
-import org.example.mapper.UserMapper;
-import org.example.model.ConnectDB;
 import org.example.model.User;
 import org.example.repository.UserRepository;
 import org.example.repository.UserRepositoryImpl;
 
 import javax.swing.*;
-import java.lang.reflect.Array;
 
 public class HomeGUI {
 
-    private JLabel nameLabel;
+    private JLabel firstnameLabel;
     private JPanel masterContent;
+    private JButton accountButton;
+    private JLabel lastnameLabel;
+    private JList userData;
+    private JButton createTrainingButton;
+    private JButton trainingListButton;
 
-    public HomeGUI(Window window) {
+    public HomeGUI(Window window, String connectionString) {
         window.getMasterContentWindow().removeAll();
         window.getMasterContentWindow().repaint();
         window.getMasterContentWindow().add(masterContent);
         window.getMasterContentWindow().revalidate();
 
-        // get users
-        UserRepository userRepository = new UserRepositoryImpl(new ConnectDB().getCollection("users"));
-        nameLabel.setText(userRepository.getAll().get(0).getFirstName());
-        System.out.println("HomeGUI");
+        UserRepository userRepository = new UserRepositoryImpl();
+        User user = userRepository.getAll(connectionString).get(0);
+        lastnameLabel.setText(user.getLastName());
+        firstnameLabel.setText(user.getFirstName());
+        accountButton.addActionListener(e -> {
+            new UserGUI(window, connectionString);
+        });
+        createTrainingButton.addActionListener(e -> {
+            new CreateTrainingGUI(window, connectionString);
+        });
+        trainingListButton.addActionListener(e -> {
+            new TrainingListGUI(window, connectionString);
+        });
     }
 }

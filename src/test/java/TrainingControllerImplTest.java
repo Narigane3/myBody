@@ -1,3 +1,4 @@
+import io.github.cdimascio.dotenv.Dotenv;
 import org.example.model.Training;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -30,6 +31,8 @@ public class TrainingControllerImplTest {
             "TestPER",
             "TestCharge");
     String id = "idArmTraining";
+    private static final Dotenv dotenv = Dotenv.load();
+    private static final String connectionString = "mongodb+srv://" + dotenv.get("DB_USERNAME") + ":" + dotenv.get("DB_PASSWORD") + "@devdescktop.vpi0ffm.mongodb.net/";
 
     TrainingControllerImpl classUnderTest;
 
@@ -49,12 +52,12 @@ public class TrainingControllerImplTest {
     @DisplayName("Test if the save method of the repository is called with a Training")
     public void save_withTraining_shouldCallRepository () {
         //Arrange
-        when(trainingRepository.addTraining(armTraining)).thenReturn(id);
+        when(trainingRepository.addTraining(armTraining, connectionString)).thenReturn(id);
 
         //Act
-        String result = classUnderTest.saveTraining(armTraining);
+        String result = classUnderTest.saveTraining(armTraining, connectionString);
 
         //Assert
-        verify(trainingRepository).addTraining(armTraining);
+        verify(trainingRepository).addTraining(armTraining, connectionString);
     }
 }
